@@ -9,15 +9,8 @@ if('IntersectionObserver' in window&&!reducedMotion.matches){
   const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}});},{threshold:.08});
   document.querySelectorAll('.reveal').forEach(element=>{element.classList.add('ready');observer.observe(element);});
 }
-const motionButtons=document.querySelectorAll('.motion-toggle');
-function setMotionPaused(paused){document.body.classList.toggle('motion-paused',paused);motionButtons.forEach(button=>{button.setAttribute('aria-pressed',String(paused));button.querySelector('.motion-label').textContent=paused?'Retomar animações':'Pausar animações';button.firstElementChild.textContent=paused?'▷':'Ⅱ';});}
+const motionButton=document.querySelector('.motion-toggle');
+function setMotionPaused(paused){document.body.classList.toggle('motion-paused',paused);motionButton.setAttribute('aria-pressed',String(paused));motionButton.querySelector('.motion-label').textContent=paused?'Retomar animações':'Pausar animações';motionButton.firstElementChild.textContent=paused?'▷':'Ⅱ';}
 setMotionPaused(reducedMotion.matches);
-motionButtons.forEach(button=>button.addEventListener('click',()=>setMotionPaused(!document.body.classList.contains('motion-paused'))));
+motionButton.addEventListener('click',()=>setMotionPaused(!document.body.classList.contains('motion-paused')));
 reducedMotion.addEventListener('change',event=>setMotionPaused(event.matches));
-
-const drivingHero=document.querySelector('.hero');
-if('IntersectionObserver' in window){
- const drivingVisibility=new IntersectionObserver(entries=>{for(const entry of entries)drivingHero.classList.toggle('driving-offscreen',!entry.isIntersecting);},{threshold:0});
- drivingVisibility.observe(drivingHero);
-}
-document.addEventListener('visibilitychange',()=>document.body.classList.toggle('page-hidden',document.hidden));
