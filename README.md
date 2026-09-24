@@ -1,5 +1,3 @@
 # Bastos & Associados
 
-Site institucional estático. Arquivos publicados em `dist/`.
-
-Vercel: framework Other, output directory dist, sem etapa de build.
+Site institucional estático. Arquivos em dist/. Publicação automática pela Vercel a partir da branch main.
