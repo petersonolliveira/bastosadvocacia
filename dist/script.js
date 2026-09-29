@@ -10,7 +10,7 @@ if('IntersectionObserver' in window&&!reducedMotion.matches){
   document.querySelectorAll('.reveal').forEach(element=>{element.classList.add('ready');observer.observe(element);});
 }
 const motionButton=document.querySelector('.motion-toggle');
-function setMotionPaused(paused){document.body.classList.toggle('motion-paused',paused);motionButton.setAttribute('aria-pressed',String(paused));motionButton.querySelector('.motion-label').textContent=paused?'Retomar animações':'Pausar animações';motionButton.firstElementChild.textContent=paused?'▷':'Ⅱ';}
+function setMotionPaused(paused){if(!motionButton)return;document.body.classList.toggle('motion-paused',paused);motionButton.setAttribute('aria-pressed',String(paused));motionButton.querySelector('.motion-label').textContent=paused?'Retomar animações':'Pausar animações';motionButton.firstElementChild.textContent=paused?'▷':'Ⅱ';}
 setMotionPaused(reducedMotion.matches);
-motionButton.addEventListener('click',()=>setMotionPaused(!document.body.classList.contains('motion-paused')));
+motionButton?.addEventListener('click',()=>setMotionPaused(!document.body.classList.contains('motion-paused')));
 reducedMotion.addEventListener('change',event=>setMotionPaused(event.matches));
